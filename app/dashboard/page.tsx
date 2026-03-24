@@ -296,7 +296,6 @@ export default function DashboardPage() {
                 <button onClick={saveFlavor} style={{ flex: 1, background: theme.accent, color: '#000', border: 'none', padding: '14px', borderRadius: '8px', fontWeight: '900', cursor: 'pointer' }}>Save Config</button>
              </div>
           </div>
-          </div>
         </div>
       )}
 
