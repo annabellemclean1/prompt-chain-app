@@ -287,7 +287,7 @@ export default function DashboardPage() {
       {/* MODAL: FLAVOR */}
       {(flavorModal === 'create' || flavorModal === 'edit') && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(2, 6, 23, 0.9)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
-          <div style={{ ...glassPanel, width: '480px', padding: '40px', background: theme.panel }}>
+          <div style={{ ...glassPanel, width: '380px', padding: '28px', background: theme.panel }}>
              <h3 style={{ fontSize: '20px', fontWeight: '900', marginBottom: '24px', color: theme.accent }}>Flavor Setup</h3>
              <input placeholder="Flavor Slug (e.g. dark-humor)" style={{ width: '100%', background: theme.bg, border: `1px solid ${theme.border}`, borderRadius: '8px', padding: '14px', color: '#fff', marginBottom: '16px', outline: 'none' }} value={flavorForm.slug} onChange={e => setFlavorForm(v => ({...v, slug: e.target.value}))} />
              <textarea placeholder="Instructional focus for this flavor..." style={{ width: '100%', background: theme.bg, border: `1px solid ${theme.border}`, borderRadius: '8px', padding: '14px', color: '#fff', height: '120px', outline: 'none', lineHeight: '1.6' }} value={flavorForm.description} onChange={e => setFlavorForm(v => ({...v, description: e.target.value}))} />
@@ -296,13 +296,14 @@ export default function DashboardPage() {
                 <button onClick={saveFlavor} style={{ flex: 1, background: theme.accent, color: '#000', border: 'none', padding: '14px', borderRadius: '8px', fontWeight: '900', cursor: 'pointer' }}>Save Config</button>
              </div>
           </div>
+          </div>
         </div>
       )}
 
       {/* MODAL: STEP */}
       {(stepModal === 'create' || stepModal === 'edit') && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(2, 6, 23, 0.9)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
-          <div style={{ ...glassPanel, width: '640px', padding: '40px', background: theme.panel, maxHeight: '90vh', overflowY: 'auto' }}>
+          <div style={{ ...glassPanel, width: '480px', padding: '28px', background: theme.panel, maxHeight: '90vh', overflowY: 'auto' }}>
              <h3 style={{ fontSize: '20px', fontWeight: '900', marginBottom: '24px', color: theme.subAccent }}>Configure Step Logic</h3>
              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                <input placeholder="Step Description (e.g. Image Analysis)" style={{ width: '100%', background: theme.bg, border: `1px solid ${theme.border}`, borderRadius: '8px', padding: '14px', color: '#fff', outline: 'none' }} value={stepForm.description} onChange={e => setStepForm(v => ({...v, description: e.target.value}))} />
