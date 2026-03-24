@@ -77,7 +77,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
         </div>
       </nav>
 
-      <main>{children}</main>
+      <main style={{ maxWidth: '100%', overflowX: 'hidden' }}>{children}</main>
     </div>
   )
 }
