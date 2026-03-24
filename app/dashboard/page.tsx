@@ -122,16 +122,16 @@ export default function DashboardPage() {
     setTestLoading(false)
   }
 
-  const theme = {
-    bg: '#0f172a',
-    panel: '#1e293b',
-    border: 'rgba(255,255,255,0.06)',
-    accent: '#00ff88',
-    subAccent: '#00e5ff',
-    textMain: '#f8fafc',
-    textMuted: '#94a3b8',
-    inputBg: '#0f172a'
-  }
+const theme = {
+  bg: 'var(--bg)',
+  panel: 'var(--panel)',
+  border: 'var(--border)',
+  accent: '#00ff88',      // keep accent hardcoded, it's brand color
+  subAccent: '#00e5ff',
+  textMain: 'var(--text-main)',
+  textMuted: 'var(--text-muted)',
+  inputBg: 'var(--input-bg)',
+}
 
   const glassPanel = { background: theme.panel, border: `1px solid ${theme.border}`, borderRadius: '12px' }
 

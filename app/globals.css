@@ -1,59 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --mono: 'IBM Plex Mono', monospace;
-  --sans: 'IBM Plex Sans', sans-serif;
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --border: rgba(0,0,0,0.08);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --input-bg: #f1f5f9;
+  --bg-hover: rgba(0,0,0,0.05);
+  --text-dim: #94a3b8;
 }
 
-/* Dark theme (default) */
-[data-theme="dark"], :root:not([data-theme="light"]) {
-  --bg: #0a0a0a;
-  --bg-panel: #111111;
-  --bg-hover: #1a1a1a;
-  --border: #222222;
-  --text: #f0f0f0;
-  --text-dim: #888;
-  --text-dimmer: #444;
-  --accent: #a855f7;
-  --red: #ff5555;
-  --red-dim: rgba(255,85,85,0.1);
-  --green: #4ade80;
-  --blue: #60a5fa;
-  --teal: #4dffd2;
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --border: rgba(255,255,255,0.06);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --input-bg: #0f172a;
+  --bg-hover: rgba(255,255,255,0.05);
+  --text-dim: #94a3b8;
 }
 
-/* Light theme */
-[data-theme="light"] {
-  --bg: #f8f8f8;
-  --bg-panel: #ffffff;
-  --bg-hover: #f0f0f0;
-  --border: #e0e0e0;
-  --text: #111111;
-  --text-dim: #555;
-  --text-dimmer: #aaa;
-  --accent: #7c3aed;
-  --red: #cc2222;
-  --red-dim: rgba(204,34,34,0.08);
-  --green: #16a34a;
-  --blue: #2563eb;
-  --teal: #0d9488;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
-    --bg: #f8f8f8;
-    --bg-panel: #ffffff;
-    --bg-hover: #f0f0f0;
-    --border: #e0e0e0;
-    --text: #111111;
-    --text-dim: #555;
-    --text-dimmer: #aaa;
-    --accent: #7c3aed;
-    --red: #cc2222;
-    --red-dim: rgba(204,34,34,0.08);
-    --green: #16a34a;
-    --blue: #2563eb;
-    --teal: #0d9488;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --border: rgba(255,255,255,0.06);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --input-bg: #0f172a;
+    --bg-hover: rgba(255,255,255,0.05);
+    --text-dim: #94a3b8;
   }
 }
 
