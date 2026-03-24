@@ -16,39 +16,67 @@ export default async function DashboardLayout({ children }: { children: React.Re
   if (!profile?.is_superadmin && !profile?.is_matrix_admin) redirect('/unauthorized')
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
-      {/* Modern, Floating Header */}
-      <nav className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/80">
-        <div className="mx-auto flex h-16 max-w-7-xl items-center justify-between px-6 lg:px-8">
+    <div className="flex min-h-screen bg-[#0a0a0b] text-slate-200 selection:bg-indigo-500/30">
 
-          {/* Logo Section */}
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold shadow-indigo-500/20 shadow-lg">
-              P
-            </div>
-            <span className="text-sm font-semibold tracking-tight text-slate-900 dark:text-white uppercase">
-              Prompt Chain <span className="text-indigo-600 italic">v2</span>
+      {/* 1. Sleek Vertical Sidebar */}
+      <aside className="fixed inset-y-0 left-0 w-64 border-r border-white/5 bg-[#0f0f11] flex flex-col hidden lg:flex">
+        {/* Logo / Branding */}
+        <div className="p-6 border-b border-white/5">
+          <div className="flex items-center gap-3">
+            <div className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
+            <span className="font-mono text-xs font-bold tracking-widest uppercase text-white">
+              PROMPT_CHAIN
             </span>
           </div>
+        </div>
 
-          {/* Controls Section */}
-          <div className="flex items-center gap-6">
-            <div className="hidden md:block text-xs font-medium text-slate-500 dark:text-slate-400 border-r border-slate-200 dark:border-slate-800 pr-6">
-              {profile?.email}
+        {/* Navigation Placeholder - You can add your links here later */}
+        <nav className="flex-1 p-4 space-y-1">
+          <div className="px-3 py-2 rounded-md bg-white/5 text-white text-sm font-medium cursor-pointer transition-all hover:bg-white/10">
+            Console
+          </div>
+          <div className="px-3 py-2 rounded-md text-slate-400 text-sm font-medium cursor-pointer transition-all hover:text-white hover:bg-white/5">
+            Workflows
+          </div>
+          <div className="px-3 py-2 rounded-md text-slate-400 text-sm font-medium cursor-pointer transition-all hover:text-white hover:bg-white/5">
+            History
+          </div>
+        </nav>
+
+        {/* User Footer Section */}
+        <div className="p-4 border-t border-white/5 bg-black/20">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-col min-w-0">
+              <span className="text-[10px] text-slate-500 font-mono truncate">{profile?.email}</span>
+              <span className="text-[10px] text-emerald-500 font-mono uppercase tracking-tighter">Admin Access</span>
             </div>
-            <div className="flex items-center gap-4">
-              <ThemeToggle />
-              <div className="h-8 w-[1px] bg-slate-200 dark:bg-slate-800" />
-              <SignOutButton />
-            </div>
+            <SignOutButton />
           </div>
         </div>
-      </nav>
+      </aside>
 
-      {/* Main Content Area with optimized padding */}
-      <main className="mx-auto max-w-7-xl p-6 lg:p-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        {children}
-      </main>
+      {/* 2. Main Canvas Area */}
+      <div className="flex-1 lg:pl-64">
+        {/* Subtle Top Bar for Actions */}
+        <header className="h-14 border-b border-white/5 bg-[#0a0a0b]/80 backdrop-blur-sm sticky top-0 z-40 flex items-center justify-between px-8">
+          <div className="text-[11px] font-mono text-slate-500 uppercase tracking-widest">
+            System / Dashboard
+          </div>
+          <div className="flex items-center gap-4">
+             <ThemeToggle />
+          </div>
+        </header>
+
+        {/* The "Stage" where children pages load */}
+        <main className="relative p-8 max-w-5xl mx-auto">
+          {/* Subtle Grid Background Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+
+          <section className="relative z-10">
+            {children}
+          </section>
+        </main>
+      </div>
     </div>
   )
 }
