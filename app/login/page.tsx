@@ -13,66 +13,75 @@ export default function LoginPage() {
     })
   }
 
+  // Matching the Midnight Cyberpunk palette exactly
+  const theme = {
+    bg: '#0f172a',        // Deep Slate
+    panel: '#1e293b',     // Lighter Slate
+    accent: '#00ff88',    // Neon Emerald
+    border: 'rgba(255,255,255,0.06)',
+    text: '#f8fafc'
+  }
+
   return (
     <div style={{
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'var(--bg)',
+      background: theme.bg, // Matches Dashboard
       padding: '20px'
     }}>
       <div style={{
         textAlign: 'center',
         padding: '60px 40px',
-        border: '1px solid var(--border)',
+        border: `1px solid ${theme.border}`,
         borderRadius: '16px',
-        background: 'var(--bg-panel)',
+        background: theme.panel, // Matches Layout Nav
         maxWidth: '400px',
         width: '100%',
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
       }}>
-        {/* TOP BADGE */}
+        {/* TERMINAL TAG */}
         <div style={{
           display: 'inline-block',
           padding: '4px 12px',
-          background: 'rgba(255,255,255,0.03)',
-          border: '1px solid var(--border)',
+          background: 'rgba(0, 255, 136, 0.05)',
+          border: `1px solid ${theme.accent}33`,
           borderRadius: '20px',
           fontFamily: 'var(--mono)',
           fontSize: '9px',
           letterSpacing: '0.2em',
-          color: 'var(--accent)',
+          color: theme.accent,
           textTransform: 'uppercase',
           marginBottom: '24px'
         }}>
-          Secure Terminal
+          System Access
         </div>
 
-        {/* LOGO */}
+        {/* LOGO - PURPLE REMOVED */}
         <h1 style={{
           fontFamily: 'var(--sans)',
           fontSize: '42px',
           fontWeight: '900',
           marginBottom: '8px',
-          color: 'var(--text)',
+          color: theme.text,
           letterSpacing: '-0.04em'
         }}>
-          crackd<span style={{ color: 'var(--accent)' }}>.</span>
+          crackd<span style={{ color: theme.accent }}>.</span>
         </h1>
 
         <p style={{
-          color: 'var(--text-dim)',
+          color: '#94a3b8',
           fontSize: '12px',
           marginBottom: '40px',
           fontFamily: 'var(--mono)',
           textTransform: 'uppercase',
-          letterSpacing: '0.05em'
+          letterSpacing: '0.1em'
         }}>
-          [ Internal Access Only ]
+          [ Superadmin Auth Required ]
         </p>
 
-        {/* ACTION BUTTON */}
+        {/* LOGIN BUTTON - NEON EMERALD */}
         <button
           onClick={signIn}
           onMouseEnter={() => setIsHovered(true)}
@@ -80,7 +89,7 @@ export default function LoginPage() {
           style={{
             width: '100%',
             padding: '16px',
-            background: isHovered ? 'var(--text)' : 'var(--accent)',
+            background: isHovered ? '#fff' : theme.accent,
             color: '#000',
             border: 'none',
             borderRadius: '8px',
@@ -90,21 +99,22 @@ export default function LoginPage() {
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
             cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            boxShadow: isHovered ? '0 0 20px rgba(255,255,255,0.2)' : `0 0 15px rgba(var(--accent-rgb, 0, 255, 136), 0.2)`
+            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+            boxShadow: isHovered
+              ? '0 0 30px rgba(255,255,255,0.2)'
+              : `0 0 15px rgba(0, 255, 136, 0.15)`
           }}
         >
-          Initialize Google OAuth →
+          Authorize via Google →
         </button>
 
-        {/* FOOTER FOOTNOTE */}
         <div style={{
           marginTop: '32px',
           fontSize: '10px',
-          color: 'var(--text-dimmer)',
+          color: '#475569',
           fontFamily: 'var(--mono)'
         }}>
-          Unauthorized attempts are logged.
+          Connection Secure // AES-256
         </div>
       </div>
     </div>
