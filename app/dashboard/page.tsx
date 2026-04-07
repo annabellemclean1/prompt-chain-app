@@ -111,16 +111,52 @@ export default function DashboardPage() {
     const swap = steps[swapIdx]; await supabase.from('humor_flavor_steps').update({ order_by: swap.order_by }).eq('id', step.id); await supabase.from('humor_flavor_steps').update({ order_by: step.order_by }).eq('id', swap.id); loadSteps(selectedFlavor!.id)
   }
 
-  const testFlavor = async () => {
-    if (!selectedFlavor || !selectedImageId || !token) return; setTestLoading(true); setTestError(''); setTestResults([])
+const testFlavor = async () => {
+  if (!selectedFlavor || !selectedImageId || !token) return;
+
+  setTestLoading(true);
+  setTestError('');
+  setTestResults([]);
+
+  try {
+    const res = await fetch('https://api.almostcrackd.ai/pipeline/generate-captions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        imageId: selectedImageId,
+        humorFlavorId: selectedFlavor.id
+      })
+    });
+
+    if (!res.ok) {
+        // This catches 500 errors from the server
+        const errorText = await res.text();
+        throw new Error(`Server Error: ${errorText}`);
+    }
+
+    // Get the response as text first to inspect it
+    const rawText = await res.text();
+
     try {
-      const res = await fetch('https://api.almostcrackd.ai/pipeline/generate-captions', { method: 'POST', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ imageId: selectedImageId, humorFlavorId: selectedFlavor.id }) })
-      if (!res.ok) throw new Error(`API error: ${await res.text()}`)
-      const data = await res.json(); setTestResults(Array.isArray(data) ? data : [data])
-      loadFlavorCaptions(selectedFlavor.id)
-    } catch (e: any) { setTestError(e.message) }
-    setTestLoading(false)
+      // Attempt to parse the text as JSON
+      const data = JSON.parse(rawText);
+      setTestResults(Array.isArray(data) ? data : [data]);
+    } catch (parseError) {
+      // If parsing fails, it means the AI "yapped" (returned prose)
+      console.error("Malformed AI Response:", rawText);
+      throw new Error("The AI returned a sentence instead of a list. Check your Step 3 instructions.");
+    }
+
+    loadFlavorCaptions(selectedFlavor.id);
+  } catch (e) {
+    setTestError(e.message);
+  } finally {
+    setTestLoading(false);
   }
+};
 
 const theme = {
   bg: 'var(--bg)',
